@@ -18,3 +18,26 @@ For all other text, if not specified above, an approximate font size is acceptab
 */
 
 /* TO-DO */
+body {
+    font-family: Arial, sans-serif;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+.nav h1 {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.house-styling {
+    font-size: 20px;
+}
+
+.footer h3 {
+    font-size: 14px;
+}
+
+.footer column p {
+    font-size: 12px;
+}
