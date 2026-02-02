@@ -25,19 +25,35 @@ body {
     padding: 0;
 }
 
-.nav h1 {
+nav {
+    background-color: #f5f4f2;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    padding: 10px 0;
+    width: 100%;
+    z-index: 99;
+}
+
+nav h1 {
     font-size: 1.5rem;
     font-weight: bold;
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+
+a {
+    justify-content: center;
 }
 
 .house-styling {
     font-size: 20px;
 }
 
-.footer h3 {
+footer h3 {
     font-size: 14px;
 }
 
-.footer column p {
+footer column p {
     font-size: 12px;
 }
