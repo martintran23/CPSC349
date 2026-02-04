@@ -14,7 +14,7 @@ Footer section headings: 'Store Info', 'About', 'Account', 'Policy'
     font-size: 14px;
 Footer content
     font-size: 12px;
-For all other text, if not specified above, an approximate font size is acceptable. 
+For all other text, if not specified above, an approximate font size is acceptable.
 */
 
 /* TO-DO */
@@ -111,10 +111,52 @@ nav a {
     background-color: #a9a9a9;
 }
 
-footer h3 {
-    font-size: 14px;
+footer {
+    background-color: #f5f4f2;
+    padding: 40px 0 30px;
+    margin-top: 60px;
 }
 
-footer column p {
+.footer-columns {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto 30px;
+    padding: 0 20px;
+}
+
+.column a {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.column a:hover {
+    text-decoration: underline;
+}
+
+
+.column h3 {
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.column p,
+.column h4 {
     font-size: 12px;
+    margin: 6px 0;
+}
+
+.footer-btn {
+    grid-column: 1 / 2;
+    background-color: #6f5eff;
+    color: white;
+    border: none;
+    width: fit-content;
+    padding: 10px 20px;
+    font-size: 12px;
+    border-radius: 999px;
+    cursor: pointer;
 }
