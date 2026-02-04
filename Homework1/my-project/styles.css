@@ -4,15 +4,15 @@
 */
 
 /* Typography: */
-/* 
-"House Design" title 
+/*
+"House Design" title
     font-size: 1.5rem;
     font-weight: bold;
-"House Styling" title 
+"House Styling" title
     font-size: 20px;
 Footer section headings: 'Store Info', 'About', 'Account', 'Policy'
     font-size: 14px;
-Footer content 
+Footer content
     font-size: 12px;
 For all other text, if not specified above, an approximate font size is acceptable. 
 */
@@ -30,9 +30,13 @@ nav {
     overflow: hidden;
     position: fixed;
     top: 0;
-    padding: 10px 0;
+    padding: 15px 0 35px 0;
     width: 100%;
     z-index: 99;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 nav h1 {
@@ -42,12 +46,69 @@ nav h1 {
     margin-bottom: 2.5rem;
 }
 
-a {
-    justify-content: center;
+nav a {
+    text-decoration: none;
+    color: #696969;
+    margin: 0 100px;
+    font-size: 1.25rem;
+    font-weight: bold;
 }
 
-.house-styling {
+.page-container {
+    max-width: 1200px;
+    margin: 140px auto 0;
+    padding: 0 20px;
+}
+
+.page-container img {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin-bottom: 40px;
+}
+
+#house-styling {
     font-size: 20px;
+    color: #6f5eff;
+}
+
+.box-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    max-width: 1200px;
+    margin: 40px auto;
+}
+
+.box {
+    background-color: #f5f4f2;
+    padding: 20px;
+    text-align: center;
+    border-radius: 8px;
+}
+
+.box img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.box h3 {
+    margin: 15px 0 10px;
+}
+
+.box button {
+    background-color: #6f5eff;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.box button:hover {
+    background-color: #a9a9a9;
 }
 
 footer h3 {
