@@ -50,8 +50,7 @@ nav a {
     text-decoration: none;
     color: #696969;
     margin: 0 100px;
-    font-size: 1.25rem;
-    font-weight: bold;
+    font-size: 1rem;
 }
 
 .page-container {
@@ -140,13 +139,14 @@ footer {
 
 .column h3 {
     font-size: 14px;
-    margin-bottom: 10px;
+    margin-bottom: 3px;
 }
 
 .column p,
 .column h4 {
     font-size: 12px;
-    margin: 6px 0;
+    margin: 9px 0;
+    display: inline-block;
 }
 
 .footer-btn {
