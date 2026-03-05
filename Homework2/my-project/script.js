@@ -1,16 +1,12 @@
 const API_BASE = 'https://api.themoviedb.org/3';
 const POSTER_BASE = 'https://image.tmdb.org/t/p/w300';
-
-// API KEY
 const API_KEY = '862e6495cb0825b0cbee9e09a51c5f81';
 
-// State
 let currentPage = 1;
 let currentQuery = '';
 let currentSort = 'release_date.desc';
 let totalPages = 1;
 
-// DOM elements
 const movieGrid = document.getElementById('movieGrid');
 const loadingMessage = document.getElementById('loadingMessage');
 const errorMessage = document.getElementById('errorMessage');
@@ -20,6 +16,32 @@ const nextBtn = document.getElementById('nextBtn');
 const searchInput = document.getElementById('searchInput');
 const searchBtn = document.getElementById('searchBtn');
 const sortSelect = document.getElementById('sortSelect');
+
+function sortMoviesClient(movies, sortKey) {
+    const [field, direction] = sortKey.split('.');
+    const dir = direction === 'asc' ? 1 : -1;
+
+    return movies.slice().sort((a, b) => {
+        let aVal;
+        let bVal;
+
+        if (field === 'release_date') {
+            aVal = a.release_date ? new Date(a.release_date).getTime() : 0;
+            bVal = b.release_date ? new Date(b.release_date).getTime() : 0;
+        } else if (field === 'vote_average') {
+            aVal = typeof a.vote_average === 'number' ? a.vote_average : 0;
+            bVal = typeof b.vote_average === 'number' ? b.vote_average : 0;
+        } else if (field === 'popularity') {
+            aVal = typeof a.popularity === 'number' ? a.popularity : 0;
+            bVal = typeof b.popularity === 'number' ? b.popularity : 0;
+        } else {
+            return 0;
+        }
+
+        if (aVal === bVal) return 0;
+        return aVal > bVal ? dir : -dir;
+    });
+}
 
 function fetchMovies() {
     loadingMessage.hidden = false;
@@ -48,7 +70,12 @@ function fetchMovies() {
         })
         .then(data => {
             totalPages = Math.min(data.total_pages || 1, 500);
-            const movies = (data.results || []).slice(0, 20);
+            let movies = (data.results || []).slice(0, 20);
+
+            if (isSearch) {
+                movies = sortMoviesClient(movies, currentSort);
+            }
+
             renderMovies(movies);
             updatePagination();
         })
@@ -62,10 +89,6 @@ function fetchMovies() {
         });
 }
 
-/**
- * Renders up to 20 movie cards into the grid.
- * @param {Array} movies - Array of movie objects from TMDB
- */
 function renderMovies(movies) {
     movieGrid.innerHTML = '';
 
@@ -138,7 +161,6 @@ function onSortChange() {
     fetchMovies();
 }
 
-// Event listeners
 searchBtn.addEventListener('click', onSearch);
 
 searchInput.addEventListener('keydown', (e) => {
