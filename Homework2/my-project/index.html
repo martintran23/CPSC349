@@ -2,11 +2,41 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Movie Explorer</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- ToDO -->
+    <header class="header">
+        <h1>Movie Explorer</h1>
+        <div class="controls">
+            <div class="search-wrapper">
+                <input type="text" id="searchInput" class="search-input" placeholder="Search movies by title..." aria-label="Search movies">
+                <button type="button" id="searchBtn" class="search-btn">Search</button>
+            </div>
+            <div class="sort-wrapper">
+                <label for="sortSelect">Sort by</label>
+                <select id="sortSelect" class="sort-select" aria-label="Sort movies">
+                    <option value="release_date.desc">Release Date (newest first)</option>
+                    <option value="vote_average.desc">Rating (highest first)</option>
+                </select>
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+        <div id="movieGrid" class="movie-grid">
+        </div>
+        <div id="loadingMessage" class="loading-message" hidden>Loading movies...</div>
+        <div id="errorMessage" class="error-message" hidden></div>
+
+        <nav class="pagination" aria-label="Movie list pagination">
+            <button type="button" id="prevBtn" class="pagination-btn" disabled>Previous</button>
+            <span id="pageNumber" class="page-number">Page 1</span>
+            <button type="button" id="nextBtn" class="pagination-btn">Next</button>
+        </nav>
+    </main>
+
     <script src="script.js"></script>
 </body>
 </html>
