@@ -1,0 +1,55 @@
+import { useEffect, useState } from "react";
+
+export default function App() {
+    const [time, setTime] = useState(0);
+    const [isRunning, setIsRunning] = useState(false);
+    const [laps, setLaps] = useState([]);
+
+    useEffect(() => {
+        let id;
+        if (isRunning) {
+            id = setInterval(() => {
+                setTime((prevTime) => prevTime + 1);
+            }, 1000);
+        } else {
+            clearInterval(id);
+        }
+        return () => clearInterval(id);
+    }, [isRunning]);
+
+    const handleStart = () => setIsRunning(true);
+    const handleStop = () => setIsRunning(false);
+    const handleReset = () => {
+        setIsRunning(false);
+        setTime(0);
+        setLaps([]);
+    };
+    const handleLap = () => {
+        setLaps([...laps, time]);
+    };
+
+    return (
+        <div>
+            <p>{time}</p>
+            <button onClick={handleStart}>Start</button>
+            <button onClick={handleStop}>Stop</button>
+            <button onClick={handleReset}>Reset</button>
+            <button onClick={handleLap} disabled={!isRunning}>
+                Lap
+            </button>
+
+            {laps.length > 0 && (
+                <div>
+                    <p>Lap Times:</p>
+                    <ul>
+                        {laps.map((lap, index) => (
+                            <li key={index}>
+                                Lap {index + 1}: {lap}
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            )}
+        </div>
+    );
+}
