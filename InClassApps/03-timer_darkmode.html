@@ -1,0 +1,74 @@
+import React, { useState, useEffect } from "react";
+
+export default function App() {
+    const [timer, setTimer] = useState(0);
+    const [isDarkMode, setIsDarkMode] = useState(false);
+    const [isRunning, setIsRunning] = useState(false);
+
+    useEffect(() => {
+        let intervalId;
+
+        if (isRunning) {
+            intervalId = setInterval(() => {
+                setTimer((prev) => {
+                    if (prev === 12) {
+                        return 0; // Reset to 0 when it reaches 12
+                    }
+                    return prev + 1;
+                });
+            }, 1000);
+        } else {
+            clearInterval(intervalId); // Clear interval when timer is stopped
+        }
+
+        return () => clearInterval(intervalId); // Clean up on component unmount
+    }, [isRunning]);
+
+    useEffect(() => {
+        if (timer >= 6) {
+            setIsDarkMode(true); // Switch to dark mode after 6 seconds
+        } else {
+            setIsDarkMode(false); // Switch to light mode before 6 seconds
+        }
+    }, [timer]);
+
+    const handleStart = () => {
+        setIsRunning(true);
+    };
+
+    const handleStop = () => {
+        setIsRunning(false);
+    };
+
+    const handleReset = () => {
+        setIsRunning(false); // Stop the timer
+        setTimer(0); // Reset the timer to 0
+        setIsDarkMode(false); // Switch back to light mode
+    };
+
+    return (
+        <div style={{ textAlign: "center", padding: "20px" }}>
+            <h1>Timer: {timer} seconds</h1>
+            <div>
+                <button onClick={handleStart} disabled={isRunning}>
+                    Start
+                </button>
+                <button onClick={handleStop} disabled={!isRunning}>
+                    Stop
+                </button>
+                <button onClick={handleReset}>Reset</button>
+            </div>
+            <div
+                style={{
+                    marginTop: "20px",
+                    padding: "10px",
+                    backgroundColor: isDarkMode ? "black" : "white",
+                    color: "red",
+                    border: "1px solid blue",
+                }}
+            >
+                Dark Mode: {isDarkMode ? "ON" : "OFF"}
+            </div>
+        </div>
+    );
+}
