@@ -8,8 +8,11 @@
 </head>
 <body>
     <header class="header">
-        <h1>Movie Explorer</h1>
-        <div class="controls">
+        <div class="header-title">
+            <h1>Movie Explorer</h1>
+        </div>
+        <div class="header-controls">
+            <div class="controls">
             <div class="search-wrapper">
                 <input type="text" id="searchInput" class="search-input" placeholder="Search movies by title..." aria-label="Search movies">
                 <button type="button" id="searchBtn" class="search-btn">Search</button>
@@ -24,6 +27,7 @@
                     <option value="popularity.desc">Popularity (most popular)</option>
                     <option value="popularity.asc">Popularity (least popular)</option>
                 </select>
+            </div>
             </div>
         </div>
     </header>
