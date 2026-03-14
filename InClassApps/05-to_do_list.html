@@ -1,0 +1,27 @@
+import { useState } from "react";
+
+export default function App() {
+  const [input, setInput] = useState("");
+  const [taskList, setTaskList] = useState([]);
+
+  const handleOnChange = (event) => {
+    setInput(event.target.value);
+  };
+
+  const handleSubmit = () => {
+    setTaskList([...taskList, input]);
+    setInput("");
+  };
+
+  return (
+    <div>
+      <input onChange={handleOnChange} value={input} />
+      <button onClick={handleSubmit}>Submit</button>
+      <div>
+        {taskList.map((task, index) => (
+          <p key={index}>{task}</p>
+        ))}
+      </div>
+    </div>
+  );
+}
