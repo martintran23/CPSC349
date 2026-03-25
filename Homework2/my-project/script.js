@@ -1,6 +1,7 @@
 const API_BASE = 'https://api.themoviedb.org/3';
 const POSTER_BASE = 'https://image.tmdb.org/t/p/w300';
-const API_KEY = '862e6495cb0825b0cbee9e09a51c5f81';
+// Paste your TMDB API key from https://www.themoviedb.org/settings/api
+const API_KEY = 'YOUR_API_KEY';
 
 let currentPage = 1;
 let currentQuery = '';
