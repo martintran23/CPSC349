@@ -1,0 +1,59 @@
+import { useState } from "react";
+
+export default function App() {
+    const [input, setInput] = useState("");
+    const [tasks, setTasks] = useState([]);
+    const [editIndex, setEditIndex] = useState(null);
+
+    // Handle input change
+    const handleChange = (e) => {
+        setInput(e.target.value);
+    };
+
+    // Handle task submission (Add or Edit)
+    const handleSubmit = () => {
+        if (editIndex != null) {
+            const updatedTasks = tasks.map((task, id) =>
+                id ===  editIndex ? input : task
+            );
+            setTasks(updatedTasks);
+            setInput("");
+            setEditIndex(null);
+        } else {
+            setTasks([...tasks,  input]);
+            setInput("");
+        }
+    };
+
+    // Handle task edit
+    const handleEdit = (index) => {
+        setEditIndex(index);
+        setInput(tasks[index]);
+    };
+
+    // Handle task delete
+    const handleDelete = (index) => {
+        const updatedTasks = [...tasks];
+        updatedTasks.splice(index, 1);
+        setTasks(updatedTasks);
+    };
+
+    return (
+        <div>
+            {/* Input Field */}
+            <input value={input} onChange={handleChange} placeholder="Enter a  task" />
+            <button onClick={handleSubmit}>Submit</button>
+
+            {/* Task List */}
+            {tasks.map((task, index) => (
+                <div key={index} => (
+                    <p>{task}</p>
+                    <button onClick={() =>
+                        handleEdit(index)}>Edit</button>
+                    <button onClick={() =>
+                        handleDelete(index)}>Delete</button>
+                </div>
+            ))}
+        </div>
+    );
+}
