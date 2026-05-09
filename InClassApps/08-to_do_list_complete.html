@@ -1,0 +1,73 @@
+import { useState } from "react";
+
+export default function App() {
+    const [input, setInput] = useState("");
+    const [tasks, setTasks] = useState([]);
+    const [editingIndex, setEditingIndex] = useState(null);
+    const [searchItem, setSeachItem] = useState("");
+
+    const handleChange = (e) => {
+        setInput(e.target.value);
+    };
+
+    const handleSubmit = () => {
+        if (editIndex !== null) {
+            const newTasks = [...tasks];
+            newTasks[editIndex] = {
+                text: input,
+                completed: tasks[editIndex].completed,
+            };
+            setTasks(newTasks);
+            setEditingIndex(null);
+        } else {
+            setTasks([...tasks, { text: input, completed: false }]);
+        }
+        setInput("");
+    };
+
+    const handleEdit = (index) => {
+        setEditingIndex(index);
+        setInput(tasks[index].text);
+    };
+
+    const handleDelete = (index) => {
+        const newTasks = [...tasks];
+        newTasks.splice(index, 1);
+        setTasks(newTasks);
+    };
+
+    const handleSearch = (e) => {
+        setSeachItem(e.target.value);
+    };
+
+    const filteredTasks = tasks.filter((task) => task.text.includes(searchItem));
+    return (
+        <div>
+            <div>
+                search <input value={searchItem} onChange={handleSearch} />
+            </div>
+            <input value={input} onChange={handlechange} />
+            <button onClick={handleSubmit}>Submit</button>
+                {filteredTasks.map((task, indexd) => (
+                    <div key = {index}>
+                        <p style={{
+                            textDecoration:
+                            task.completed ? "line-through" : "none",
+                        }
+                        >
+                            {task.text}
+                        </p>
+                        <button
+                            onClick={() => {
+                                handleToggleComplete(index);
+                            }}
+                        >
+                            {task.completed ? "Undo" : "Complete"}
+                        </button>
+                        <button onClick={() => handleEdit(index)}>Edit</button>
+                        <button onClick={() => handleDelete(index)}>Delete</button>
+                    </div>
+                ))}
+        </div>
+    );
+}
