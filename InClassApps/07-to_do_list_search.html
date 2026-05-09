@@ -1,0 +1,76 @@
+import { useState } from "react";
+
+export default function App() {
+    const [input, setInput] = useState("");
+    const [tasks, setTasks] = useState([]);
+    const [searchTerm, setSearchTerm] = useState("");
+    const [editIndex, setEditIndex] = useState(null);
+
+    // Handle input change
+    const handleChange = (e) => {
+        setInput(e.target.value);
+    };
+
+    // Handle task submission (Add or Edit)
+    const handleSubmit = () => {
+        if (editIndex != null) {
+            const updatedTasks = tasks.map((task, id) =>
+                id === editIndex ? input : task
+            );
+            setTasks(updatedTasks);
+            setInput("");
+            setEditIndex(null);
+        } else {
+            setTasks([...tasks, input]);
+            setInput("");
+        }
+    };
+
+    // Handle task edit
+    const handleEdit = (index) => {
+        setEditIndex(index);
+        setInput(tasks[index]);
+    };
+
+    // Handle task delete
+    const handleDelete = (index) => {
+        const updatedTasks = [...tasks];
+        updatedTasks.splice(index, 1);
+        setTasks(updatedTasks);
+    };
+
+    // Handle searh input
+    const handleSearch = (e) => {
+        setSearchTerm(e.target.value);
+    };
+
+    // Filter tasks based on search term
+    const filteredTasks = tasks.filter((task) =>
+        task.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
+    return (
+        <div>
+            {/* Search Bar */}
+            <input
+                type="text"
+                placceholder="Search tasks..."
+                value={searchTerm}
+                onChange={handleSearch}
+            />
+
+            {/* Input Field */}
+            <input value={input} onChange={handleChange} placeholder="Enter a task" />
+            <button onClick={handleSubmit}>Submit</button>
+
+            {/* Task List */}
+            {filteredTasks.map((task, index) => (
+                <div key={index}>
+                    <p>{task}</p>
+                    <button onClick={() => handleEdit(index)}>Edit</button>
+                    <button onClick={() => handleDelete(index)}>Delete</button>
+                </div>
+            ))}
+        </div>
+    );
+}
